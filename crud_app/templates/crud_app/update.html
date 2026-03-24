@@ -1,0 +1,48 @@
+{% extends 'crud_app/base.html' %}
+
+{% block links %}
+
+    <a href="{% url 'update' %}">atualizar cadastro</a>
+    <a href="{% url 'user_info' %}">meus alertas de incêndio</a>
+    <a href="{%url 'logout' %}">sair</a>
+
+{% endblock links %}
+
+{% block content %}
+
+  <h2 class="page-title">Editar Usuário</h2>
+
+
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    <label>Nome
+      <input type="text" name="nome" value="{{ usuario.nome }}" required />
+    </label>
+
+    <label>Email
+      <input type="email" name="email" value="{{ usuario.email }}" required />
+    </label>
+
+    <label>Número CLCB
+      <input type="number" 
+             name="clcb" 
+             value="{{ usuario.clcb|default_if_none:'' }}"
+             oninput="this.value = this.value.replace(/[^0-9]/g, '');" {% comment %} remove acentos, vírgula, ponto... garante que somente número serão digitados {% endcomment %}
+             placeholder="Número CLCB (Opcional)"
+      >
+    </label>
+
+    <label>Nova senha
+      <input type="password" name="senha" placeholder="Nova Senha (deixe em branco para não alterar)" />
+    </label>
+    
+    <button type="submit">Atualizar</button>
+    
+    {% comment %} mensagens de erro passadas pela view {% endcomment %}
+    {% if erro %}
+      <p>{{ erro }}</p>
+    {% endif %}
+  </form>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'crud_app/base.html' %} 
+
+{% block links %}
+
+    <a href="{% url 'create' %}">cadastrar</a>
+
+{% endblock links %}
+
+{% block content %}
+
+  <h2 class="page-title">Tela de Login</h2>
+
+
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <label>Email
+      <input type="email" name="email" placeholder="seuemail@gmail.com" required />
+    </label>
+
+    <label>Senha
+      <input type="password" name="senha" required />
+    </label>
+
+    <button type="submit">Entrar</button>
+    
+    {% comment %} mensagens de erro passadas pela view {% endcomment %}
+    {% if erro %}
+      <span>{{ erro }}</span>
+    {% endif %}
+  </form>
+
+{% endblock content %}

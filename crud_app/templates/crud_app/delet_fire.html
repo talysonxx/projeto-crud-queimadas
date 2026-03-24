@@ -1,0 +1,30 @@
+{% extends 'crud_app/base.html' %}
+
+{% block links %}
+
+    <a href="{% url 'update' %}">atualizar cadastro</a>
+    <a href="{% url 'user_info' %}">meus alertas de incêndio</a>
+    <a href="{%url 'logout' %}">sair</a>
+    
+{% endblock links %}
+
+{% block content %}
+
+    <p><a href="{% url 'user_info' %}">voltar<a/></p>
+
+    <p>você está excluindo o incêndio em <strong>{{ incendio.local }}</strong>.</p>
+    <p>digite sim para excluir.</p>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="sim" name="deletar" required/>
+
+        <button type="submit">apagar</button>
+
+        {% comment %} mensagens de erro passada pela view {% endcomment %}
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+    <form>
+
+{% endblock content %}

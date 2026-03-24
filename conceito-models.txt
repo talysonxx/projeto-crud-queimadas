@@ -1,0 +1,33 @@
+from django.db import models
+
+class Usuario(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    senha = models.CharField(max_length=100)
+    telefone = models.IntegerField()
+    clcb = models.IntegerField()
+
+class Area(models.Model):
+    
+    # Para o campo gravidade
+    RISCO_GRAVE = 'grave'
+    RISCO_MEDIO = 'medio'
+    RISCO_BAIXO = 'baixo'
+    
+    GRAVIDADE_CHOICES = [
+        (RISCO_GRAVE, 'Grave'),
+        (RISCO_MEDIO, 'Médio'),
+        (RISCO_BAIXO, 'Baixo'),
+    ]
+    
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    local = models.CharField(max_length=255)
+    gravidade = models.CharField(max_length=10, choices=GRAVIDADE_CHOICES)
+
+def _str_(self):
+    return self.nome
+"""
+def _str_(self):
+    return self.local
+"""

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Incêndios - Parauapebas</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('data:image/jpeg;base64,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');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #333;
+    }
+
+    /* sobreposição escura para destacar o conteúdo */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+     nav {
+      background-color: #b91c1c;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between; /* Alterado para justificar o conteúdo */
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    nav {
+      background-color: #b91c1c;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between; /* Alterado para justificar o conteúdo */
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    nav h1 {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0; /* Adicionado para remover margem padrão */
+    }
+
+    /* Estilos para a nova barra de navegação */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    /* Botões com borda branca, fundo transparente e texto preto */
+.btn-white-border {
+  padding: 10px 24px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: black;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-white-border:hover {
+  background-color: white;
+  
+}
+ .nav-links .btn-white-border{
+  background-color: white;
+ }
+
+.btn-white-border a {
+  color: black;
+  text-decoration: none;
+}
+    
+
+    .nav-links button {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .nav-links button:hover {
+      background-color: white;
+      color: #e9e6e6;
+    }
+    .nav-links .btn-logout {
+      background-color: white;
+      
+      
+    }
+    .nav-links .btn-logout:hover {
+      background-color: white;
+      color: white;
+      border-color: white;
+    }
+
+    main {
+      max-width: 1300px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .map-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      padding: 8px;
+    }
+
+    #map {
+      height: 450px;
+      width: 100%;
+      border-radius: 12px;
+      border: 3px solid #dc2626;
+      box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+    }
+
+    .map-buttons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-around;
+      gap: 12px;
+    }
+
+    .map-buttons button {
+      flex: 1;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background 0.2s;
+    }
+
+    #centerMap { background: #2563eb; }
+    #centerMap:hover { background: #1e40af; }
+    #clearMarkers { background: #374151; }
+    #clearMarkers a { text-decoration: none; color: white; width: 100% }
+    #clearMarkers:hover { background: #111827; }
+    #showFires { background: #dc2626; }
+    #showFires:hover { background: #991b1b; }
+
+    .bottom-section {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .form-container {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      padding: 1.5rem 2rem;
+      min-width: 300px;
+    }
+
+    .form-container h2 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 0.8rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .form-container button {
+      width: 100%;
+      background: #dc2626;
+      color: white;
+      font-size: 1rem;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .form-container button:hover {
+      background: #991b1b;
+    }
+
+    #alertContainer {
+      flex: 1;
+      background: rgba(254, 226, 226, 0.92);
+      border-left: 8px solid #dc2626;
+      color: #991b1b;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      min-width: 300px;
+    }
+
+    #alertContainer p {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    #alertList {
+      margin-top: 0.6rem;
+      padding-left: 1.2rem;
+    }
+
+    .fire-marker {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+
+    .fire-marker.grave {
+      background: #ff1e00;
+      border-color: #ffb5a8;
+    }
+
+    .fire-marker.medio {
+      background: #ffcc00;
+      border-color: #fff09a;
+    }
+
+    .fire-marker.baixo {
+      background: #00c851;
+      border-color: #a6f5c1;
+    }
+
+    li {
+      margin: 10px;
+    }
+
+    li:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .user-name {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: white; /* Deixa igual ao sair */
+  color: black;            /* Texto preto */
+  border: none;            /* Remove a borda branca */
+  transition: background-color 0.3s ease;
+
+
+}
+
+
+
+
+.user-name a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  
+}
+
+
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: 2px solid white;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 12px;
+}
+
+.btn-logout:hover {
+  background-color: rgba(222, 210, 210, 0.1);
+}
+
+.btn-logout a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      nav h1 {
+        font-size: 1.1rem;
+        text-align: left;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .nav-links button,
+      .btn-white-border,
+      .btn-logout,
+      .user-name {
+        width: auto;
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+
+      main {
+        margin: 1rem auto;
+        padding: 0 0.75rem;
+      }
+
+      #map {
+        height: 320px;
+      }
+
+      .map-buttons {
+        flex-direction: column;
+      }
+
+      .map-buttons button {
+        width: 100%;
+      }
+
+      .bottom-section {
+        flex-direction: column;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+<body>
+   <nav>
+    <h1>⛑️PEBASQUEIMAS🆘 </h1>
+    <div class="nav-links">
+      {% comment %} mensagem customizada caso seja um usuário logado {% endcomment %}
+       {% if usuario %}
+        <span class="user-name"> <a href="{% url 'user_info' %}" title="Informações Cadastro">{{ usuario.nome }}</a>👤     </span>
+
+        <button class="btn-logout"><a href="{% url 'logout' %}">Sair🚪</a></button>
+      {% else %}
+        {% comment %} caso seja um usuário não logado, mostra os links de autenticação {% endcomment %}
+        <button class="btn-white-border"><a href="{% url 'login' %}">Entrar</a></button>
+        <button class="btn-white-border"><a href="{% url 'create' %}">Cadastrar</a></button>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main>
+    <section class="map-container">
+      <div id="map"></div>
+      <div class="map-buttons">
+        <button id="centerMap">Centralizar</button>
+        <button id="showFires">Mostrar</button>
+          
+        {% comment %} redireciona para a página de informações do usuário, onde (o administrador) poderá excluir os alertas que desejar {% endcomment %}
+        {% if administrador %}
+          <button id="clearMarkers"><a href="{% url 'user_info' %}">Limpar</a></button>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="bottom-section">
+      {% comment %} somente usuários logados (bombeiros) poderão adicionar incêndios {% endcomment %}
+      {% if usuario %}
+        <div class="form-container">
+          <h2>Adicionar Incêndio 🔥 - [somente usuários autorizados]</h2>
+          <form id="fireForm" action="{% url 'create_index' %}" method='POST'>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="location">Local</label>
+              <input type="text" id="location" name="local" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="latitude">Latitude</label>
+                <input type="number" step="any" id="latitude" name="latitude" min="-90" max="90" required>
+              </div>
+              <div class="form-group">
+                <label for="longitude">Longitude</label>
+                <input type="number" step="any" id="longitude" name="longitude" min="-180" max="180" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="severity">Gravidade</label>
+              <select id="severity" name="gravidade" required>
+                <option value="grave">Grave</option>
+                <option value="medio">Médio</option>
+                <option value="baixo">Baixo</option>
+              </select>
+            </div>
+            <button type="submit">Confirmar</button>
+          </form>
+        </div>
+      {% endif %}
+
+      {% comment %} mostra os alertas de incêndio. {% endcomment %}
+      <div id="alertContainer">
+        <p>Alertas de Incêndio 🔥</p>
+        <ul id="alertList">
+          {% comment %} mensagem customizada caso não tenha nenhum incêndio no banco. {% endcomment %}
+          {% if not incendios %}
+            <li>sem incêndios para mostrar.</li>
+          {% endif%}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Coordenada Padrão para Centralização
+    const DEFAULT_LAT = -6.0675;
+    const DEFAULT_LNG = -49.9039;
+    const DEFAULT_ZOOM = 13;
+    const FIRE_ZOOM = 14;
+    const ALERT_ZOOM = 16;
+    
+    // Configuração do Mapa
+    var map = L.map('map').setView([DEFAULT_LAT, DEFAULT_LNG], DEFAULT_ZOOM);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 16,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var fireMarkers = [];
+    const alertList = document.getElementById('alertList');
+    
+    // Função de Adicionar Marcador/Alerta
+    function addFire(location, lat, lng, severityDisplay) {
+        // normalize("NFD"): decompõe tudo, inclusive acentos, em caracteres
+        // replace(/[\u0300-\u036f]/g, ""): remove acentos especiais
+        const severityClass = severityDisplay.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        
+        const marker = L.marker([lat, lng], {
+            icon: L.divIcon({ className: `fire-marker ${severityClass}`, iconSize: [16,16], iconAnchor: [8,8] })
+        }).addTo(map)
+        .bindPopup(`🔥 Incêndio detectado: ${location} | Gravidade: ${severityDisplay}`);
+
+        fireMarkers.push(marker);
+
+        // Adiciona o item à lista HTML
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        li.textContent = `${location} | Lat: ${lat}, Lng: ${lng} | Gravidade: ${severityDisplay}`;
+        
+        li.addEventListener('click', () => {
+            map.setView([lat, lng], ALERT_ZOOM); // Move o mapa para a localização, zoom mais próximo
+            marker.openPopup(); // Abre o popup do marcador
+        });
+        
+        alertList.appendChild(li);
+    }
+
+    // ação botão mostar fogos
+    document.getElementById('showFires').addEventListener('click', () => {
+        // Caso não tenha incêndios, centraliza no ponto padrão
+        if(fireMarkers.length === 0) {
+            map.setView([DEFAULT_LAT, DEFAULT_LNG], DEFAULT_ZOOM);
+        }
+        
+        // Centraliza no primeiro incêndio
+        const firstFire = fireMarkers[0].getLatLng();
+        map.setView(firstFire, FIRE_ZOOM); 
+        fireMarkers[0].openPopup(); // Abre o popup do primeiro incêndio
+    });
+
+    // botão centralizar, simplesmente coloca o map na localização e zoom padrão
+    document.getElementById('centerMap').addEventListener('click', () => {
+      map.setView([DEFAULT_LAT, DEFAULT_LNG], DEFAULT_ZOOM);
+      map.closePopup();
+    });
+
+    function sanitizeNumberInput(value) {
+      let v = value.replace(',', '.');
+
+      // permite apenas dígitos, um ponto e um sinal de menos no começo
+      v = v.replace(/[^0-9\.\-]/g, '');
+
+      // só um sinal de menos no começo
+      v = v.replace(/(?!^)-/g, '');
+
+      // só um ponto
+      v = v.replace(/(\..*)\./g, '$1');
+
+      return v;
+    }
+
+    // RECEBENDO DADOS DO DJANGO E MAPEANDO
+    {% if incendios %}
+        // Loop no Django para alimentar a função JavaScript com dados do DB
+        {% for incendio in incendios %}
+          addFire(
+            "{{ incendio.local|escapejs }}",
+            parseFloat("{{ incendio.latitude|escapejs }}".replace(',', '.')),
+            parseFloat("{{ incendio.longitude|escapejs }}".replace(',', '.')),
+            "{{ incendio.get_gravidade_display|escapejs }}"
+          );
+        {% endfor %}
+    {% endif %}
+  </script>
+</body>
+</html>

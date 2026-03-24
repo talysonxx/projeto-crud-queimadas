@@ -1,0 +1,45 @@
+{% extends 'crud_app/base.html' %} 
+
+{% block links %}
+
+    <a href="{% url 'login' %}">login</a>
+    
+{% endblock links %}
+
+{% block content %}
+
+ <h2 class="page-title">Tela de Cadastro</h2>
+
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <label>Nome
+      <input type="text" name="nome" required/>
+    </label>
+
+    <label>Email
+      <input type="email" name="email" placeholder="seuemail@gmail.com" required />
+    </label>
+
+    <label>CLCB
+      <input type="number" 
+             name="clcb"
+             oninput="this.value = this.value.replace(/[^0-9]/g, '');" {% comment %} remove acentos, vírgula, ponto... garante que somente número serão digitados {% endcomment %}
+             placeholder="Número CLCB"
+             required
+      >
+    </label>
+
+    <label>Senha
+      <input type="password" name="senha" required />
+    </label>
+
+    <button type="submit">Cadastrar</button>
+    
+    {% comment %} mensagens de erro passadas pela view {% endcomment %}
+    {% if error %}
+      <span>{{ error }}</span>
+    {% endif %}
+  </form>
+
+{% endblock content %}

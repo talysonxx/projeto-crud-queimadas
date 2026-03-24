@@ -1,0 +1,68 @@
+{% extends 'crud_app/base.html' %}
+
+{% block links %}
+
+    <a href="{% url 'update' %}">atualizar cadastro</a>
+    <a href="{% url 'user_info' %}">meus alertas de incêndio</a>
+    <a href="{%url 'logout' %}">sair</a>
+
+{% endblock links %}
+
+{% block content %}
+
+<div class="user-alerts-container">
+
+    {% if usuario.email == 'admin@gmail.com' %}
+        <p class="admin-info">Você é o <strong>administrador</strong>. Pode excluir quaisquer alertas e usuários cadastrados.</p>
+    {% else %}
+        <h1 class="page-title">Alertas de Incêndio</h1>
+        <p class="subtitle">adicionados por <strong>{{ usuario.nome }}</strong></p>
+    {% endif %}
+
+    <p class="tip">Clique em um alerta para excluir 🔥</p>
+
+    {% if incendios %}
+        <div class="alerts-list">
+            {% for fogo in incendios %}
+            <a href="{% url 'delet_fire' fogo.id %}" class="alert-card">
+                <div class="alert-title">{{ fogo.local }}</div>
+
+                <div class="alert-info">
+                    {% if usuario.email == 'admin@gmail.com' %}
+                        <span class="admin-extra">Adicionado por: <strong>{{ fogo.usuario }}</strong></span>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-message">
+            {% if usuario.email == 'admin@gmail.com' %}
+                Não há nenhum alerta cadastrado.
+            {% else %}
+                Você ainda não adicionou nenhum alerta.
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if usuario.email == 'admin@gmail.com' %}
+        {% if not usuarios %}
+            <p class="empty-message">Não há usuários cadastrados além do administrador.</p>
+        {% endif %}
+    {% endif %}
+
+    {% if usuarios %}
+        <h2 class="section-title">Usuários cadastrados (clique para excluir)</h2>
+
+        <div class="user-list">
+            {% for u in usuarios %}
+                <a href="{% url 'delet_user' u.id %}" class="user-card">
+                    👤 {{ u.nome }}
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
