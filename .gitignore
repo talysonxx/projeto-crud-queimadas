@@ -4,3 +4,4 @@ tabelas-banco.txt
 __pycache__/
 db.sqlite3
 *.py[cod]
+conceito-models.txt
