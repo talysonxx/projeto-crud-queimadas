@@ -20,17 +20,17 @@ O sistema permite que qualquer pessoa visualize em tempo real a localização e 
 ## 🛠️ Tecnologias e Arquitetura
 
 O projeto utiliza uma stack moderna para garantir performance e facilidade de manutenção:
-* **Linguagem:** Python 3.x
+* **Linguagem:** Python
 * **Framework Web:** Django (MTV Architecture)
 * **Frontend:** HTML5, CSS3 (Design responsivo)
-* **Mapas:** API OpenStreetMap (via Leaflet.js ou similar)
+* **Mapas:** API OpenStreetMap
 * **Banco de Dados:** SQLite (padrão de desenvolvimento)
 
 ### Colaboração do Grupo:
 Este projeto foi o resultado de um esforço conjunto, com a seguinte divisão de responsabilidades:
-* **Backend & Integração de APIs:** [Seu Nome Aqui]
-* **Modelagem de Dados & Banco de Dados:** [Nome do Colega]
-* **Interface (Templates & UI/UX):** [Nome do Colega]
+* **Backend & Integração de APIs:** eu (Talyson) e Ícaro
+* **Modelagem de Dados & Banco de Dados:** Júlia e Saulo
+* **Interface (Templates & UI/UX):** Ronan
 
 ---
 
@@ -40,5 +40,48 @@ Siga os passos abaixo para rodar o ambiente em sua máquina local:
 
 ### 1. Clonar o repositório
 ```bash
-git clone [https://github.com/seu-usuario/projeto-queimadas-naldo.git](https://github.com/seu-usuario/projeto-queimadas-naldo.git)
+git clone https://github.com/seu-usuario/projeto-queimadas-naldo.git
 cd projeto-queimadas-naldo
+```
+
+### 2. Configurar o Ambiente Virtual (VENV)
+```bash
+# Criar o ambiente
+python -m venv venv
+
+# Ativar (Windows)
+.\venv\Scripts\activate
+
+# Ativar (Linux/Mac)
+source venv/bin/activate
+```
+
+### 3. Instalar Dependências
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Preparar o Banco e Carregar Dados Iniciais (Fixtures)
+Como o projeto já possui usuários e configurações pré-definidas, basta rodar:
+```bash
+# Criar a estrutura das tabelas
+python manage.py migrate
+
+# Carregar os usuários e dados iniciais (Admin/Bombeiros)
+python manage.py loaddata fixtures/*.json
+```
+
+### 5. Iniciar o Servidor
+```bash
+python manage.py runserver
+```
+Acesse no navegador: `http://127.0.0.1:8000/`
+
+---
+
+## 🔐 Credenciais de Acesso
+O projeto já vem configurado com usuários de teste via fixtures para facilitar a avaliação.
+> **Admin / Bombeiro:** Consulte o arquivo `acesso.txt` para verificar os logins e senhas pré-definidos que foram carregados no banco.
+
+---
+*Este é um projeto acadêmico sem fins lucrativos, desenvolvido para fins de aprendizado.*
