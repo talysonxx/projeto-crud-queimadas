@@ -32,6 +32,18 @@ Este projeto foi o resultado de um esforço conjunto, com a seguinte divisão de
 * **Modelagem de Dados & Banco de Dados:** Júlia e Saulo
 * **Interface (Templates & UI/UX):** Ronan
 
+### Imagens
+<img width="1919" height="926" alt="Screenshot_2" src="https://github.com/user-attachments/assets/8205d4af-a856-40f1-9ad5-f4b4fec3c286" />
+</br></br>
+<img width="1919" height="922" alt="Screenshot_3" src="https://github.com/user-attachments/assets/e12fe000-371e-4eb6-8d35-4fa2ad65916f" />
+</br></br>
+<img width="1919" height="917" alt="Screenshot_6" src="https://github.com/user-attachments/assets/939fc3aa-fd28-4d23-9c02-87d0ba64eba2" />
+</br></br>
+<img width="1919" height="925" alt="Screenshot_7" src="https://github.com/user-attachments/assets/ac0a913c-a60d-40c9-ad03-effe50788d5d" />
+</br></br>
+<img width="1919" height="923" alt="Screenshot_5" src="https://github.com/user-attachments/assets/2529668c-d6e4-4873-92dd-86e3f172ff1a" />
+
+
 ---
 
 ## 🚀 Como Executar o Projeto
